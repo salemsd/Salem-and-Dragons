@@ -1,6 +1,6 @@
 package out
 
-import model.DndMap
+import model.DndMapState
 
 trait ExplorationRenderingPortOut:
-  def renderMapState(dndMap: DndMap): Unit
+  def renderMapState(dndMap: DndMapState): Unit

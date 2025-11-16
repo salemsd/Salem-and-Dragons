@@ -23,7 +23,7 @@ lazy val endGame =
       name := "endGame",
       libraryDependencies ++= Seq(munit)
     )
-    .dependsOn(exploration, combat, socialInteraction)
+    .dependsOn(exploration, combat, socialInteraction, infra, commons)
 
 // COMMONS
 lazy val commons =
@@ -56,6 +56,7 @@ lazy val socialInteraction =
       name := "socialInteraction",
       libraryDependencies ++= Seq(munit)
     )
+    .dependsOn(commons)
 
 // INFRA
 
@@ -65,4 +66,4 @@ lazy val infra =
       name := "infra",
       libraryDependencies ++= Seq(munit)
     )
-    .dependsOn(combat, exploration)
+    .dependsOn(combat, exploration, socialInteraction)
