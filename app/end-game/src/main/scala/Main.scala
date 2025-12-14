@@ -35,7 +35,7 @@ import scala.util.{Failure, Success, Try, Using}
     case "2" =>
       val player = createCharacter()
       println("\nGenerating map...")
-      val randomMap = RandomMapGenerator.generate(player, width = 20, height = 10)
+      val randomMap = RandomMapGenerator.generate(player, width = 20)
       dataStorage.saveMapState(randomMap)
       println("Map generated. Good luck!")
       Thread.sleep(1000)
@@ -65,7 +65,7 @@ import scala.util.{Failure, Success, Try, Using}
   var gameRunning = true
 
   while gameRunning do
-    val currentState = dataStorage.getMapState()
+    val currentState = dataStorage.getMapState
 
     rendering.renderMapState(currentState)
 
@@ -192,7 +192,7 @@ def handleAction(
       Thread.sleep(1000)
       GameStatus.Continue
     case NextAction.FIGHT =>
-      val fresh = dataOps.getMapState()
+      val fresh = dataOps.getMapState
       val target = getTargetCoordinates(fresh.characterCoordinates, fresh.characterDirection)
 
       fresh.villains.find(_._1 == target) match
@@ -200,7 +200,7 @@ def handleAction(
           fightingEngine.fight(fresh.character, villain) match
             case Left(_) => GameStatus.GameOver
             case Right(_) =>
-              val post = dataOps.getMapState()
+              val post = dataOps.getMapState
               if post.villains.find(_._1 == target).exists(_._2.hp <= 0) then
                 println(s"Enemy defeated!")
                 val alive = post.villains.filterNot(_._1 == target)
