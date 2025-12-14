@@ -6,6 +6,9 @@ import randomness.MachineDefaultRandomnessAdapter
 import rendering.ConsoleRenderingAdapter
 import model.{Coordinates, DndMapState}
 
+import domain.{CharacterGenerator, CharacterManager}
+import social.RandomInteractionAdapter
+
 import scala.annotation.tailrec
 import scala.io.{Source, StdIn}
 import scala.util.{Failure, Random, Success, Try, Using}
@@ -15,10 +18,19 @@ import scala.util.{Failure, Random, Success, Try, Using}
   val dataStorage    = new MutableCollectionDataStorageAdapter()
   val rendering      = new ConsoleRenderingAdapter()
   val randomness     = new MachineDefaultRandomnessAdapter()
+  val interactionAdapter  = new RandomInteractionAdapter()
+
+  // Social
+  val characterGenerator = new CharacterGenerator()
+  val characterManager = new CharacterManager(interactionAdapter)
 
   // Core
   val mapManager     = new MapManager(dataStorage)
   val movementEngine = new MovementEngine(dataStorage)
+  val mapGenerator = new RandomMapGenerator(
+    villainProvider = characterGenerator,
+    npcProvider = characterGenerator
+  )
   val fightingEngine = new FightingEngine(randomness, rendering, dataStorage)
 
   print("\u001b[2J") // clear
@@ -35,7 +47,7 @@ import scala.util.{Failure, Random, Success, Try, Using}
     case "2" =>
       val player = createCharacter()
       println("\nGenerating map...")
-      val randomMap = RandomMapGenerator.generate(player, width = 20)
+      val randomMap = mapGenerator.generate(player, width = 20)
       dataStorage.saveMapState(randomMap)
       println("Map generated. Good luck!")
       Thread.sleep(1000)
@@ -76,7 +88,15 @@ import scala.util.{Failure, Random, Success, Try, Using}
     parseDirection(input) match
       case Some(direction) =>
         val action = movementEngine.move(direction)
-        val status = handleAction(action, direction, currentState, fightingEngine, dataStorage)
+        val status = handleAction(
+          action,
+          direction,
+          currentState,
+          fightingEngine,
+          dataStorage,
+          characterGenerator,
+          characterManager
+        )
 
         status match
           case GameStatus.GameOver =>
@@ -179,7 +199,9 @@ def handleAction(
                   direction: CardinalDirection,
                   stateBeforeAction: DndMapState,
                   fightingEngine: FightingEngine,
-                  dataOps: MutableCollectionDataStorageAdapter
+                  dataOps: MutableCollectionDataStorageAdapter,
+                  npcGenerator: domain.CharacterGenerator,
+                  socialEngine: domain.CharacterManager
                 ): GameStatus =
   action match
     case NextAction.MOVE => GameStatus.Continue
@@ -188,17 +210,9 @@ def handleAction(
       Thread.sleep(800)
       GameStatus.Continue
     case NextAction.TALK =>
-      val quotes = List(
-        "NPC: 'Le gras, c'est la vie !'",
-        "NPC: 'Vous ne passerez pas !'",
-        "NPC: 'C'est une bonne situation ça, aventurier ?'",
-        "NPC: 'Je suis ton père...'",
-        "NPC: 'Fuyez, pauvres fous !'",
-        "NPC: 'Vers l'infini et au-delà !'"
-      )
-      val randomQuote = quotes(Random.nextInt(quotes.length))
-
-      println(s"$randomQuote")
+      val npc = npcGenerator.generateRandomNpc()
+      val line = socialEngine.talkTo(npc)
+      println(s"$line")
       Thread.sleep(1500)
       GameStatus.Continue
     case NextAction.FIGHT =>

@@ -1,3 +1,6 @@
 package in
 
-trait ForInteracting
+import characters.DndCharacter
+
+trait ForInteracting:
+  def talkTo(character: DndCharacter): String

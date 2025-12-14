@@ -50,7 +50,7 @@ class MapManager(dataPort: ExplorationDataPortOut) extends ForValidatingMap:
 
           charCoords = Some(Coordinates(x, y))
           charDir = Some(dir)
-          
+
           character = customPlayer match
             case Some(player) => Some(player)
             case None =>

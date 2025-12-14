@@ -32,12 +32,17 @@ However, if you still have some tweaks to add, you can still commit some work un
 * **Stat Allocation System:** Implemented a system allowing players to distribute points between **HP** and **Armor Class (AC)** with limits.
 * **Expanded Classes:** Added `WIZARD` (d10 damage) and `FIGHTER` (d12 damage) alongside the existing `PALADIN`.
 
-### 3. Combat Engine & Mechanics
+### 3. Social Interaction Module
+* **Modular Architecture:** Implemented a dedicated `social-interaction` module following Hexagonal Architecture to handle NPC logic separately from combat and exploration.
+* **Dynamic Dialogues:** Players can interact with NPCs to trigger random dialogues, which pulls content from an adapter.
+* **Generation:** The `CharacterGenerator` service is injected into the map generator to create random Enemies and NPCs with diffeerent races and shouts.
+
+### 4. Combat Engine & Mechanics
 * **Turn-Based Logic:** Fully implemented `FightingEngine` with Initiative rolls to determine turn order.
 * **AC & Attack Rolls:** Implemented D&D style combat mechanics where attacks must roll against the defender's Armor Class (AC) to hit.
 * **Robust Identity:** Refactored the `DndCharacter` model to use unique IDs (`UUID`) and display Names, ensuring the combat log correctly identifies who attacks whom (e.g., "Orc Enemy vs Player") instead of generic labels.
 
-### 4. Technical Improvements
+### 5. Technical Improvements
 * **Rendering:** Enhanced `ConsoleRenderingAdapter` to provide detailed combat feedback (rolls, hits, misses, damage dealt) and specific direction symbols for the player.
 
 ---

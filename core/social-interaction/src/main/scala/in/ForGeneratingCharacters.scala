@@ -1,3 +1,0 @@
-package in
-
-trait ForGeneratingCharacters
