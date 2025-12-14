@@ -1,0 +1,13 @@
+-- Training Map (6x6)
+M - 6 - 6
+
+-- Start: Top Left, facing South
+C - 0 - 0 - 1 - HUMAN - PALADIN - 12 - 20 - S
+
+NPC - 0 - 2
+
+-- A weak goblin to practice fighting
+PC - 3 - 3 - 1 - GOBLIN - FIGHTER - 10 - 10
+
+-- A small reward for completing the training
+GP - 5 - 5 - 50

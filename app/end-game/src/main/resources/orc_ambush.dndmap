@@ -1,0 +1,15 @@
+-- Ambush Map (15x5)
+M - 15 - 5
+
+-- Start: Left side, facing East (towards enemies)
+C - 0 - 2 - 3 - ELF - WIZARD - 11 - 20 - E
+
+-- Frontline Guards (Orc Fighters)
+PC - 5 - 1 - 2 - ORC - FIGHTER - 12 - 20
+PC - 5 - 3 - 2 - ORC - FIGHTER - 12 - 20
+
+-- The Commander (Orc Paladin) protecting the loot
+PC - 10 - 2 - 4 - ORC - PALADIN - 14 - 35
+
+-- The Hoard
+GP - 14 - 2 - 500

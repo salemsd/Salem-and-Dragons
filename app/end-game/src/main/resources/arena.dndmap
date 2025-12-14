@@ -1,0 +1,20 @@
+-- Arena Map (20x15)
+M - 20 - 15
+
+-- Start: Center, facing North
+C - 10 - 7 - 5 - DWARF - FIGHTER - 15 - 45 - N
+
+NPC - 8 - 7
+NPC - 12 - 7
+
+-- One PC in each corner
+PC - 3 - 3 - 5 - HUMAN - PALADIN - 15 - 40
+PC - 16 - 3 - 5 - ELF - WIZARD - 12 - 30
+PC - 3 - 11 - 5 - ORC - FIGHTER - 14 - 45
+PC - 16 - 11 - 5 - GOBLIN - FIGHTER - 16 - 25
+
+-- Rewards hidden in the far corners
+GP - 0 - 0 - 200
+GP - 19 - 0 - 200
+GP - 0 - 14 - 200
+GP - 19 - 14 - 200

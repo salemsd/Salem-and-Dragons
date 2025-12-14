@@ -19,5 +19,9 @@ Github ID: guihardbastien
 **On December 1st** we'll have a few questions about your project I strongly recommend it is finished by then. 
 However if you still have some tweaks to add, you can still commit some work until December 8th
 
-###
+---
+
+# What was added
+
+
  

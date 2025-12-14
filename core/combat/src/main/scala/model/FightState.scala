@@ -1,3 +1,11 @@
 package model
-// TODO: add params
-case class FightState()
+
+import characters.DndCharacter
+
+case class FightState(
+                       attacker: DndCharacter,
+                       defender: DndCharacter,
+                       attackRoll: Int,
+                       damageDealt: Int,
+                       isHit: Boolean
+                     )
