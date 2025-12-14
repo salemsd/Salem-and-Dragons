@@ -8,7 +8,7 @@ import model.{Coordinates, DndMapState}
 
 import scala.annotation.tailrec
 import scala.io.{Source, StdIn}
-import scala.util.{Failure, Success, Try, Using}
+import scala.util.{Failure, Random, Success, Try, Using}
 
 @main def Main(): Unit =
   // Infra
@@ -188,8 +188,18 @@ def handleAction(
       Thread.sleep(800)
       GameStatus.Continue
     case NextAction.TALK =>
-      println("NPC: 'Run Forrest, run...'")
-      Thread.sleep(1000)
+      val quotes = List(
+        "NPC: 'Le gras, c'est la vie !'",
+        "NPC: 'Vous ne passerez pas !'",
+        "NPC: 'C'est une bonne situation ça, aventurier ?'",
+        "NPC: 'Je suis ton père...'",
+        "NPC: 'Fuyez, pauvres fous !'",
+        "NPC: 'Vers l'infini et au-delà !'"
+      )
+      val randomQuote = quotes(Random.nextInt(quotes.length))
+
+      println(s"$randomQuote")
+      Thread.sleep(1500)
       GameStatus.Continue
     case NextAction.FIGHT =>
       val fresh = dataOps.getMapState

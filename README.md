@@ -39,4 +39,52 @@ However, if you still have some tweaks to add, you can still commit some work un
 
 ### 4. Technical Improvements
 * **Rendering:** Enhanced `ConsoleRenderingAdapter` to provide detailed combat feedback (rolls, hits, misses, damage dealt) and specific direction symbols for the player.
- 
+
+---
+
+# How to Play
+
+### 1. Prerequisites
+Before starting, ensure you have **Java** and **sbt** (Scala Build Tool) installed on your machine.
+
+### 2. Running the Game
+Open your terminal in the project root folder and run the following command:
+
+```bash
+sbt "project endGame" run
+````
+
+### 3\. Game Interface
+
+The game is played entirely in the terminal. Here is what the symbols mean:
+
+* **^ / v / \< / \>** : Your Character (The arrow points to where you are looking)
+* **E** : Enemy (Goblin, Orc, etc.)
+* **$** : Treasure (Gold)
+* **?** : NPC (Friendly character)
+* **.** : Empty floor
+
+**Stats interface:**
+Below the map, you will see your stats:
+
+> **Hero Name** (HP: 25 | GOLD: 100)
+> Pos: (X, Y) | Dir: SOUTH
+
+### 4\. Controls
+
+Type the letter corresponding to your desired action and press **ENTER**.
+
+* **Z** or **N** : Move **NORTH** (Up)
+* **S** : Move **SOUTH** (Down)
+* **Q** or **W** : Move **WEST** (Left)
+* **D** or **E** : Move **EAST** (Right)
+* **X** : **EXIT** the game
+
+### 5\. Mechanics
+
+* **Movement:** If you walk into a wall, you will just rotate to face it.
+* **Combat:** Walk into an **Enemy (E)** to attack them. You may need to hit them multiple times to defeat them.
+* **Looting:** Walk onto a **Treasure ($)** to pick it up automatically.
+* **Talking:** Walk into an **NPC (?)** to hear what they have to say.
+
+-----
