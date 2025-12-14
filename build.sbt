@@ -67,10 +67,3 @@ lazy val infra =
       libraryDependencies ++= Seq(munit)
     )
     .dependsOn(combat, exploration, socialInteraction)
-
-lazy val root = (project in file("."))
-  .settings(
-    name := "E5-and-Dragons",
-    publish / skip := true
-  )
-  .aggregate(endGame, commons, exploration, combat, socialInteraction, infra)
